@@ -9,6 +9,7 @@ export const HomeScreen = () => {
   const {top} = useSafeAreaInsets();
   const {simplePokemonList, loadPokemon} = usePokemonPaginated();
   //console.log(simplePokemonList);
+  
 
   return (
     <View>
@@ -32,6 +33,7 @@ export const HomeScreen = () => {
                 ...stylesGlobal.globalMargin,
                 top: top + 20,
                 marginBottom: top + 20,
+                paddingBottom:10
               }}>
               Pokedex
             </Text>

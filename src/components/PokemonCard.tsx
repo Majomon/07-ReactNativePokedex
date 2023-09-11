@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import {SimplePokemon} from '../interfaces/pokemonInterfaces';
 import {FadeInImage} from './FadeInImage';
+import {useState, useEffect} from 'react';
+import {getImageColors} from '../helpers/getImageColors';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -20,9 +22,33 @@ export const PokemonCard = ({pokemon}: Props) => {
   const capitalize = (str: any) => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
+
+  const [bgColor, setBgColor] = useState('grey');
+
+  useEffect( () => {
+    const fetchData = async () => {
+      try {
+        const uri = pokemon.picture;
+        console.log(uri);
+        const { primary } = await getImageColors(uri);
+        setBgColor(primary);
+      } catch (error) {
+        // Manejar el error aquí
+        console.error('Error al obtener colores de la imagen:', error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+
   return (
     <TouchableOpacity activeOpacity={0.9}>
-      <View style={{...styles.cardContainer, width: windowWidth * 0.4}}>
+      <View
+        style={{
+          ...styles.cardContainer,
+          width: windowWidth * 0.4,
+          backgroundColor: bgColor,
+        }}>
         <View>
           <Text style={styles.name}>
             {capitalize(pokemon.name)} {`\n#` + pokemon.id}
