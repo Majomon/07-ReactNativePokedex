@@ -3,11 +3,12 @@ import {FlatList, Image, Text, View, ActivityIndicator} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {stylesGlobal} from '../theme/appTheme';
 import {usePokemonPaginated} from '../hooks/usePokemonPaginated';
+import {FadeInImage} from '../components/FadeInImage';
 
 export const HomeScreen = () => {
   const {top} = useSafeAreaInsets();
   const {simplePokemonList, loadPokemon} = usePokemonPaginated();
-  console.log(simplePokemonList);
+  //console.log(simplePokemonList);
 
   return (
     <View>
@@ -21,10 +22,7 @@ export const HomeScreen = () => {
         //Quitando barra vertical
         showsVerticalScrollIndicator={false}
         renderItem={({item}) => (
-          <Image
-            source={{uri: item.picture}}
-            style={{width: 100, height: 100}}
-          />
+          <FadeInImage uri={item.picture} style={{width: 100, height: 100}} />
         )}
         //Scroll infinito, cuando este llegando al final del scroll llamo a la función loadPokemon
         onEndReached={loadPokemon}
