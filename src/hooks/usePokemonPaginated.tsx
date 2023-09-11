@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from 'react';
-import {pokemonApi} from '../api/PokemonApi';
+import {pokemonApi} from '../api/pokemonApi';
 import {
   PokemonPaginatedResponse,
   Result,
@@ -41,5 +41,5 @@ export const usePokemonPaginated = () => {
     loadPokemon();
   }, []);
 
-  return {simplePokemonList, isLoading};
+  return {simplePokemonList, isLoading, loadPokemon};
 };

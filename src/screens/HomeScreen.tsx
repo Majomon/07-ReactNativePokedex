@@ -1,12 +1,12 @@
 import React from 'react';
-import {FlatList, Image, Text, View} from 'react-native';
+import {FlatList, Image, Text, View, ActivityIndicator} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {stylesGlobal} from '../theme/appTheme';
 import {usePokemonPaginated} from '../hooks/usePokemonPaginated';
 
 export const HomeScreen = () => {
   const {top} = useSafeAreaInsets();
-  const {isLoading, simplePokemonList} = usePokemonPaginated();
+  const {simplePokemonList, loadPokemon} = usePokemonPaginated();
   console.log(simplePokemonList);
 
   return (
@@ -21,8 +21,11 @@ export const HomeScreen = () => {
         renderItem={({item}) => (
           <Text style={{color: 'black'}}>{item.name}</Text>
         )}
-        //Scroll infinito
-        onEndReached={}
+        //Scroll infinito, cuando este llegando al final del scroll llamo a la función loadPokemon
+        onEndReached={loadPokemon}
+        onEndReachedThreshold={0.4}
+        //activity indicator
+        ListFooterComponent={<ActivityIndicator style={{height:100}} size={30} color={"grey"}/>}
       />
       {/*       <Text
         style={{
