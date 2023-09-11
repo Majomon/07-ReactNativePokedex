@@ -16,34 +16,36 @@ export const HomeScreen = () => {
         source={require('../assets/pokebola.png')}
         style={stylesGlobal.pokebolaBG}
       />
-      <FlatList
-        data={simplePokemonList}
-        keyExtractor={pokemon => pokemon.id}
-        //Quitando barra vertical
-        showsVerticalScrollIndicator={false}
-        //Número de columnas de como se va a mostrar
-        numColumns={2}
-        //Header
-        ListHeaderComponent={
-          <Text
-            style={{
-              ...stylesGlobal.title,
-              ...stylesGlobal.globalMargin,
-              top: top + 20,
-              marginBottom: top + 20,
-            }}>
-            Pokedex
-          </Text>
-        }
-        renderItem={({item}) => <PokemonCard pokemon={item} />}
-        //Scroll infinito, cuando este llegando al final del scroll llamo a la función loadPokemon
-        onEndReached={loadPokemon}
-        onEndReachedThreshold={0.4}
-        //Activity indicator
-        ListFooterComponent={
-          <ActivityIndicator style={{height: 100}} size={30} color={'grey'} />
-        }
-      />
+      <View style={{alignItems: 'center'}}>
+        <FlatList
+          data={simplePokemonList}
+          keyExtractor={pokemon => pokemon.id}
+          //Quitando barra vertical
+          showsVerticalScrollIndicator={false}
+          //Número de columnas de como se va a mostrar
+          numColumns={2}
+          //Header
+          ListHeaderComponent={
+            <Text
+              style={{
+                ...stylesGlobal.title,
+                ...stylesGlobal.globalMargin,
+                top: top + 20,
+                marginBottom: top + 20,
+              }}>
+              Pokedex
+            </Text>
+          }
+          renderItem={({item}) => <PokemonCard pokemon={item} />}
+          //Scroll infinito, cuando este llegando al final del scroll llamo a la función loadPokemon
+          onEndReached={loadPokemon}
+          onEndReachedThreshold={0.4}
+          //Activity indicator
+          ListFooterComponent={
+            <ActivityIndicator style={{height: 100}} size={30} color={'grey'} />
+          }
+        />
+      </View>
     </View>
   );
 };
