@@ -18,14 +18,21 @@ export const HomeScreen = () => {
       <FlatList
         data={simplePokemonList}
         keyExtractor={pokemon => pokemon.id}
+        //Quitando barra vertical
+        showsVerticalScrollIndicator={false}
         renderItem={({item}) => (
-          <Text style={{color: 'black'}}>{item.name}</Text>
+          <Image
+            source={{uri: item.picture}}
+            style={{width: 100, height: 100}}
+          />
         )}
         //Scroll infinito, cuando este llegando al final del scroll llamo a la función loadPokemon
         onEndReached={loadPokemon}
         onEndReachedThreshold={0.4}
-        //activity indicator
-        ListFooterComponent={<ActivityIndicator style={{height:100}} size={30} color={"grey"}/>}
+        //Activity indicator
+        ListFooterComponent={
+          <ActivityIndicator style={{height: 100}} size={30} color={'grey'} />
+        }
       />
       {/*       <Text
         style={{
