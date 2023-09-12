@@ -11,6 +11,8 @@ export const Tabs = () => {
     <Tab.Navigator
       sceneContainerStyle={{backgroundColor: 'white'}}
       screenOptions={{
+        //Para que no se vea el titulo de la pagina arriba a la izquierda
+        headerShown: false,
         tabBarActiveTintColor: '#5856D6',
         tabBarLabelStyle: {
           marginBottom: 10,
@@ -38,7 +40,7 @@ export const Tabs = () => {
         name="SearchScreen"
         component={SearchScreen}
         options={{
-          tabBarLabel: 'Search',
+          tabBarLabel: 'Búsqueda',
           tabBarIcon: ({color}) => (
             <Icon name="search-outline" size={25} color={color} />
           ),
