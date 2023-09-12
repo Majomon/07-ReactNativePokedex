@@ -14,6 +14,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {FadeInImage} from '../components/FadeInImage';
 import {usePokemon} from '../hooks/usePokemon';
+import {PokemonDetail} from '../components/PokemonDetail';
 
 interface Props extends StackScreenProps<RootStackParams, 'PokemonScreen'> {}
 
@@ -45,9 +46,13 @@ export const PokemonScreen = ({navigation, route}: Props) => {
         <FadeInImage uri={picture} style={styles.pokemonImage} />
       </View>
       {/* Detalles, loading */}
-      <View style={styles.activityIndicator}>
-        <ActivityIndicator size={50} color={color} />
-      </View>
+      {isLoading ? (
+        <View style={styles.activityIndicator}>
+          <ActivityIndicator size={50} color={color} />
+        </View>
+      ) : (
+        <PokemonDetail pokemon={pokemon}/>
+      )}
     </View>
   );
 };
