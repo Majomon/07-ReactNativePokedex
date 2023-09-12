@@ -42,7 +42,11 @@ export const PokemonDetail = ({pokemon}: Props) => {
         <Text style={styles.title}>Sprites</Text>
       </View>
       {/* Puedo usar scrollview o flatlist */}
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+      <ScrollView
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        //En el componente scrolView en lugar de darle estilo con style debo hacerlo con "contentContainerStyle"
+        contentContainerStyle={styles.scroll}>
         <FadeInImage
           uri={pokemon.sprites.front_default}
           style={styles.basicSprite}
@@ -88,12 +92,40 @@ export const PokemonDetail = ({pokemon}: Props) => {
           ))}
         </View>
       </View>
+
+      {/* Stats */}
+      <View style={{...styles.container}}>
+        <Text style={styles.title}>Stats</Text>
+        <View>
+          {pokemon.stats.map((stat, index) => (
+            <View key={stat.stat.name + index} style={{flexDirection: 'row'}}>
+              <Text
+                style={{...styles.typesPokemon, marginRight: 10, width: 150}}>
+                {capitalize(stat.stat.name)}
+              </Text>
+              <Text style={{...styles.typesPokemon, fontWeight: 'bold'}}>
+                {stat.base_stat}
+              </Text>
+            </View>
+          ))}
+        </View>
+
+        {/* Sprite final */}
+        <View
+          style={{marginBottom: 20, marginVertical: 10, alignItems: 'center'}}>
+          <FadeInImage
+            uri={pokemon.sprites.front_default}
+            style={styles.basicSprite}
+          />
+        </View>
+      </View>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     marginHorizontal: 20,
   },
   title: {
@@ -106,8 +138,12 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 17,
   },
+  scroll: {
+    marginHorizontal: 5,
+  },
   basicSprite: {
-    width: 100,
-    height: 100,
+    width: 90,
+    height: 90,
+    marginHorizontal:5
   },
 });
