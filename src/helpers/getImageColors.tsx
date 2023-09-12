@@ -6,7 +6,7 @@ export const getImageColors = async (uri: string) => {
     fallbackTextColor: '#ffffff',
   });
 
-  let primary = res.dominant;
+  let dominant = res.dominant;
 
-  return {primary};
+  return {dominant};
 };
