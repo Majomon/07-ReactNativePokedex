@@ -8,7 +8,7 @@ import {
   Image,
   ActivityIndicator,
 } from 'react-native';
-import {RootStackParams} from '../navigator/Navigator';
+import {RootStackParams} from '../navigator/Tab1';
 import {capitalize} from '../helpers/capitalize';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -51,7 +51,7 @@ export const PokemonScreen = ({navigation, route}: Props) => {
           <ActivityIndicator size={50} color={color} />
         </View>
       ) : (
-        <PokemonDetail pokemon={pokemon}/>
+        <PokemonDetail pokemon={pokemon} />
       )}
     </View>
   );
