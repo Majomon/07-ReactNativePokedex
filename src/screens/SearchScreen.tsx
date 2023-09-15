@@ -20,11 +20,19 @@ export const SearchScreen = () => {
     if (term.length === 0) {
       return setPokemonFiltered([]);
     }
-    setPokemonFiltered(
-      simplePokemonList.filter(poke =>
-        poke.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()),
-      ),
-    );
+    //NaN -> No es un número
+    if (isNaN(Number(term))) {
+      setPokemonFiltered(
+        simplePokemonList.filter(poke =>
+          poke.name.toLocaleLowerCase().includes(term.toLocaleLowerCase()),
+        ),
+      );
+    } else {
+      // Forma 1 -  Lo pongo dentro de un [] porque simplePokemon es un arreglo
+      // setPokemonFiltered([simplePokemonList.find(poke => poke.id === term)!]);
+      const pokemonById = simplePokemonList.find(poke => poke.id === term);
+      setPokemonFiltered(pokemonById ? [pokemonById] : []);
+    }
   }, [term]);
 
   if (isFetching) {
