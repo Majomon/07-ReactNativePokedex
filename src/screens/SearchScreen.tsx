@@ -1,35 +1,39 @@
-import {View, Text, FlatList} from 'react-native';
 import React from 'react';
+import {Dimensions, FlatList, Text, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {Loading} from '../components/Loading';
+import {PokemonCard} from '../components/PokemonCard';
 import {SearchInput} from '../components/SearchInput';
 import {usePokemonSearch} from '../hooks/usePokemonSearch';
-import {ActivityIndicator} from 'react-native';
-import {StyleSheet} from 'react-native';
 import {stylesGlobal} from '../theme/appTheme';
-import {PokemonCard} from '../components/PokemonCard';
+
+const screenWidth = Dimensions.get('window').width;
 
 export const SearchScreen = () => {
   const {top} = useSafeAreaInsets();
   const {isFetching, simplePokemonList} = usePokemonSearch();
 
   if (isFetching) {
-    return (
-      <View style={styles.container}>
-        <ActivityIndicator size={50} color="grey" />
-        <Text style={styles.textLoading}>Cargando...</Text>
-      </View>
-    );
+    return <Loading />;
   }
+
   return (
     <View
       style={{
         flex: 1,
-        marginTop: top + 10,
+        //marginTop: top + 10,
         marginHorizontal: 20,
         //backgroundColor: 'red',
       }}>
       {/* Buscador */}
-      <SearchInput />
+      <SearchInput
+        style={{
+          position: 'absolute',
+          zIndex: 999,
+          width: screenWidth - 40,
+          top: top + 30,
+        }}
+      />
 
       <FlatList
         data={simplePokemonList}
@@ -44,7 +48,7 @@ export const SearchScreen = () => {
             style={{
               ...stylesGlobal.title,
               ...stylesGlobal.globalMargin,
-
+              marginTop: top + 80,
               paddingBottom: 10,
             }}>
             Pokedex
@@ -55,15 +59,3 @@ export const SearchScreen = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textLoading: {
-    color: 'black',
-    fontSize: 15,
-  },
-});
